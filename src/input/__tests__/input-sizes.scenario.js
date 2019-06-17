@@ -12,20 +12,28 @@ import {StatefulInput, SIZE} from '../index.js';
 
 export const name = 'input-sizes';
 
-export const component = () => (
-  <>
-    <StatefulInput
-      size={SIZE.compact}
-      initialState={{value: 'Compact'}}
-      endEnhancer=".com"
-    />
-    <br />
-    <StatefulInput initialState={{value: 'Default'}} endEnhancer=".com" />
-    <br />
-    <StatefulInput
-      size={SIZE.large}
-      initialState={{value: 'Large'}}
-      endEnhancer=".com"
-    />
-  </>
-);
+export const component = () => {
+  return (
+    <>
+      <StatefulInput
+        size={SIZE.compact}
+        initialState={{value: 'Compact'}}
+        endEnhancer=".com"
+        clearable
+      />
+      <br />
+      <StatefulInput
+        initialState={{value: 'Default'}}
+        endEnhancer=".com"
+        clearable
+      />
+      <br />
+      <StatefulInput
+        size={SIZE.large}
+        initialState={{value: 'Large'}}
+        endEnhancer=".com"
+        clearable
+      />
+    </>
+  );
+};

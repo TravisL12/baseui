@@ -8,7 +8,42 @@ LICENSE file in the root directory of this source tree.
 import {styled} from '../styles/index.js';
 import type {ThemeT} from '../styles/types.js';
 import {ADJOINED, ENHANCER_POSITION, SIZE} from './constants.js';
+import {DeleteAlt} from '../icon/index.js';
 import type {SharedPropsT} from './types.js';
+
+export const getClearIconSize = (size: string) => {
+  switch (size) {
+    case SIZE.compact: {
+      return 'scale600';
+    }
+    case SIZE.large: {
+      return 'scale750';
+    }
+    default: {
+      return 'scale650';
+    }
+  }
+};
+
+export const ClearContainer = styled('div', ({$size, $isTextarea, $theme}) => {
+  const sidePadding =
+    $size === SIZE.compact
+      ? $theme.sizing.scale100
+      : $size === SIZE.large
+        ? $theme.sizing.scale300
+        : $theme.sizing.scale200;
+  return {
+    display: 'flex',
+    alignItems: $isTextarea ? 'flex-start' : 'center',
+    paddingLeft: sidePadding,
+    paddingRight: sidePadding,
+    paddingTop: $isTextarea ? sidePadding : '0px',
+  };
+});
+
+export const ClearIcon = styled(DeleteAlt, {
+  cursor: 'pointer',
+});
 
 function getInputPadding(size, sizing) {
   return {

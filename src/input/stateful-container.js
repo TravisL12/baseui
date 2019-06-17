@@ -24,6 +24,7 @@ class StatefulContainer<T: EventTarget> extends React.Component<
     initialState: {},
     stateReducer: defaultStateReducer,
     onChange: () => {},
+    onClear: () => {},
   };
 
   state: StateT = {
@@ -36,6 +37,11 @@ class StatefulContainer<T: EventTarget> extends React.Component<
     this.props.onChange(e);
   };
 
+  onClear = (e: SyntheticInputEvent<T>) => {
+    this.internalSetState(STATE_CHANGE_TYPE.clear, e);
+    this.props.onClear(e);
+  };
+
   internalSetState = <T: EventTarget>(
     type: StateTypeT,
     e: SyntheticInputEvent<T>,
@@ -43,6 +49,8 @@ class StatefulContainer<T: EventTarget> extends React.Component<
     let nextState = {};
     if (type === STATE_CHANGE_TYPE.change) {
       nextState = {value: e.target.value};
+    } else if (type === STATE_CHANGE_TYPE.clear) {
+      nextState = {value: ''};
     }
     const newState = this.props.stateReducer(type, nextState, this.state);
     this.setState(newState);
@@ -51,11 +59,12 @@ class StatefulContainer<T: EventTarget> extends React.Component<
   render() {
     // eslint-disable-next-line no-unused-vars
     const {children, initialState, stateReducer, ...restProps} = this.props;
-    const {onChange} = this;
+    const {onChange, onClear} = this;
     return children({
       ...restProps,
       ...this.state,
       onChange,
+      onClear,
     });
   }
 }

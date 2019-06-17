@@ -7,6 +7,7 @@ LICENSE file in the root directory of this source tree.
 // @flow
 export const STATE_CHANGE_TYPE = {
   change: 'change',
+  clear: 'clear',
 };
 
 export const CUSTOM_INPUT_TYPE = {

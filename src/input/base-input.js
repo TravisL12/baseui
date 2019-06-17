@@ -9,11 +9,13 @@ LICENSE file in the root directory of this source tree.
 import * as React from 'react';
 
 import {getOverrides} from '../helpers/overrides.js';
-
 import {ADJOINED, SIZE, CUSTOM_INPUT_TYPE} from './constants.js';
 import {
   InputContainer as StyledInputContainer,
   Input as StyledInput,
+  ClearIcon,
+  ClearContainer,
+  getClearIconSize,
 } from './styled-components.js';
 import type {BaseInputPropsT, InternalStateT} from './types.js';
 import {getSharedProps} from './utils.js';
@@ -43,6 +45,8 @@ class BaseInput<T: EventTarget> extends React.Component<
     onKeyPress: () => {},
     onKeyUp: () => {},
     onFocus: () => {},
+    onClear: () => {},
+    clearable: false,
     overrides: {},
     placeholder: '',
     required: false,
@@ -130,6 +134,23 @@ class BaseInput<T: EventTarget> extends React.Component<
         >
           {type === CUSTOM_INPUT_TYPE.textarea ? value : null}
         </Input>
+        {this.props.clearable && this.props.value ? (
+          <ClearContainer
+            $size={this.props.size}
+            $isTextarea={this.props.type === CUSTOM_INPUT_TYPE.textarea}
+          >
+            <ClearIcon
+              size={getClearIconSize(this.props.size)}
+              onClick={event => {
+                if (this.props.inputRef.current) {
+                  this.props.inputRef.current.focus();
+                }
+                this.props.onClear(event);
+              }}
+              title="Clear input"
+            />
+          </ClearContainer>
+        ) : null}
         <After {...sharedProps} {...afterProps} />
       </InputContainer>
     );

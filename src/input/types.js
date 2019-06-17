@@ -102,6 +102,10 @@ export type BaseInputPropsT<T> = {
   onKeyPress?: (e: SyntheticKeyboardEvent<T>) => mixed,
   onKeyUp?: (e: SyntheticKeyboardEvent<T>) => mixed,
   onFocus: (e: SyntheticFocusEvent<T>) => mixed,
+  /** A handler for when the clear value icon is activated. */
+  onClear: (e: SyntheticInputEvent<T>) => mixed,
+  /** If true, a clear icon is added to the end of the input. */
+  clearable: boolean,
   overrides: BaseInputComponentsT,
   placeholder: string,
   /** Renders component in 'required' state. */
@@ -143,6 +147,10 @@ export type StatefulContainerPropsT<T> = {
   /** A state change handler. Used to override default state transitions. */
   stateReducer: StateReducerT,
   onChange: (e: SyntheticInputEvent<T>) => mixed,
+  /** A handler for when a use clicks the clear value icon.  */
+  onClear: (e: SyntheticInputEvent<T>) => mixed,
+  /** If true, adds a clear value button to the end of the input container. */
+  clearable?: boolean,
 };
 
 type OmitPropsT = {
