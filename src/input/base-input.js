@@ -75,6 +75,13 @@ class BaseInput<T: EventTarget> extends React.Component<
     this.props.onBlur(e);
   };
 
+  onKeyUp = (e: SyntheticKeyboardEvent<T>) => {
+    if (this.props.clearable && e.key === 'Escape') {
+      this.props.onClear(e);
+    }
+    this.props.onKeyUp(e);
+  };
+
   render() {
     const {
       value,
@@ -120,7 +127,7 @@ class BaseInput<T: EventTarget> extends React.Component<
           onFocus={this.onFocus}
           onKeyDown={this.props.onKeyDown}
           onKeyPress={this.props.onKeyPress}
-          onKeyUp={this.props.onKeyUp}
+          onKeyUp={this.onKeyUp}
           placeholder={this.props.placeholder}
           type={this.props.type}
           value={this.props.value}

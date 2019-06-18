@@ -100,10 +100,10 @@ export type BaseInputPropsT<T> = {
   onChange?: (e: SyntheticInputEvent<T>) => mixed,
   onKeyDown?: (e: SyntheticKeyboardEvent<T>) => mixed,
   onKeyPress?: (e: SyntheticKeyboardEvent<T>) => mixed,
-  onKeyUp?: (e: SyntheticKeyboardEvent<T>) => mixed,
+  onKeyUp: (e: SyntheticKeyboardEvent<T>) => mixed,
   onFocus: (e: SyntheticFocusEvent<T>) => mixed,
   /** A handler for when the clear value icon is activated. */
-  onClear: (e: SyntheticInputEvent<T>) => mixed,
+  onClear: (e: SyntheticInputEvent<T> | SyntheticKeyboardEvent<T>) => mixed,
   /** If true, a clear icon is added to the end of the input. */
   clearable: boolean,
   overrides: BaseInputComponentsT,
