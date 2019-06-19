@@ -82,6 +82,13 @@ class BaseInput<T: EventTarget> extends React.Component<
     this.props.onKeyUp(e);
   };
 
+  onClearIconClick = (e: SyntheticMouseEvent<T>) => {
+    if (this.props.inputRef.current) {
+      this.props.inputRef.current.focus();
+    }
+    this.props.onClear(e);
+  };
+
   render() {
     const {
       value,
@@ -148,12 +155,7 @@ class BaseInput<T: EventTarget> extends React.Component<
           >
             <ClearIcon
               size={getClearIconSize(this.props.size)}
-              onClick={event => {
-                if (this.props.inputRef.current) {
-                  this.props.inputRef.current.focus();
-                }
-                this.props.onClear(event);
-              }}
+              onClick={this.onClearIconClick}
               title="Clear input"
             />
           </ClearContainer>

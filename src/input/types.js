@@ -103,7 +103,7 @@ export type BaseInputPropsT<T> = {
   onKeyUp: (e: SyntheticKeyboardEvent<T>) => mixed,
   onFocus: (e: SyntheticFocusEvent<T>) => mixed,
   /** A handler for when the clear value icon is activated. */
-  onClear: (e: SyntheticInputEvent<T> | SyntheticKeyboardEvent<T>) => mixed,
+  onClear: (e: SyntheticMouseEvent<T> | SyntheticKeyboardEvent<T>) => mixed,
   /** If true, a clear icon is added to the end of the input. */
   clearable: boolean,
   overrides: BaseInputComponentsT,
@@ -148,7 +148,7 @@ export type StatefulContainerPropsT<T> = {
   stateReducer: StateReducerT,
   onChange: (e: SyntheticInputEvent<T>) => mixed,
   /** A handler for when a use clicks the clear value icon.  */
-  onClear: (e: SyntheticInputEvent<T>) => mixed,
+  onClear: (e: SyntheticMouseEvent<T> | SyntheticKeyboardEvent<T>) => mixed,
   /** If true, adds a clear value button to the end of the input container. */
   clearable?: boolean,
 };
